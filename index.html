@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plato Note | 次世代グローバルリーダーを育てる未来型リベラルアーツ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1c2d4f;
+      --navy-l: #2a3f6f;
+      --pink:   #d4617a;
+      --pink-l: #fdeef2;
+      --pink-m: #f4a7b9;
+      --white:  #ffffff;
+      --gray:   #f5f7fa;
+      --gray-m: #e8ecf2;
+      --text:   #1e2a3a;
+      --muted:  #6b7a8d;
+      --border: #dde2ec;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.75;
+    }
+
+    h1, h2, h3, .logo-text {
+      font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+    }
+
+    /* ── HEADER ──────────────────────────────── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo-wrap {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+
+    .logo-icon { width: 36px; height: 36px; }
+
+    .logo-text {
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--navy);
+      letter-spacing: .03em;
+    }
+
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .875rem; font-weight: 500;
+      letter-spacing: .03em;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--navy); }
+
+    .nav-cta {
+      background: var(--navy) !important;
+      color: var(--white) !important;
+      padding: 9px 22px;
+      border-radius: 4px;
+      font-weight: 700 !important;
+      transition: background .2s, opacity .2s !important;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: var(--gray);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 60%, rgba(212,97,122,.07) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 25%, rgba(28,45,79,.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; max-width: 780px; }
+
+    .hero-badge {
+      display: inline-block;
+      border: 1.5px solid var(--pink-m);
+      color: var(--pink);
+      font-size: .75rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      letter-spacing: .14em;
+      padding: 5px 18px; border-radius: 2px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.25;
+      letter-spacing: .01em;
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      color: var(--pink);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: clamp(.95rem, 1.8vw, 1.1rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 44px;
+      line-height: 1.95;
+    }
+
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 700; font-size: .97rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 15px 36px; border-radius: 4px;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+      letter-spacing: .04em;
+    }
+    .btn-primary:hover { opacity: .85; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-block;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+      font-weight: 700; font-size: .97rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 14px 32px; border-radius: 4px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-secondary:hover { background: var(--gray); }
+
+    /* ── SECTIONS COMMON ──────────────────────── */
+    section { padding: 96px 24px; }
+
+    .container { max-width: 1040px; margin: 0 auto; }
+
+    .section-eyebrow {
+      display: block;
+      font-size: .72rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--pink);
+      letter-spacing: .2em;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 580px;
+      line-height: 1.95;
+      margin-bottom: 56px;
+    }
+
+    /* ── MVV ──────────────────────────────────── */
+    #mvv { background: var(--white); }
+
+    .mvv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .mvv-card {
+      background: var(--white);
+      padding: 40px 36px;
+    }
+
+    .mvv-label {
+      font-size: .7rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--pink);
+      letter-spacing: .18em;
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .mvv-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 2px;
+      background: var(--pink);
+    }
+
+    .mvv-heading {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .mvv-text {
+      font-size: .9rem; color: var(--muted); line-height: 1.9;
+    }
+
+    /* ── PROBLEM ──────────────────────────────── */
+    #problem { background: var(--gray); }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .problem-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 24px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+
+    .problem-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--pink-l);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .problem-card p { font-size: .9rem; color: var(--text); line-height: 1.8; }
+    .problem-card strong { color: var(--navy); }
+
+    /* ── SERVICE ──────────────────────────────── */
+    #service { background: var(--white); }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 32px 28px;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .service-card:hover {
+      box-shadow: 0 4px 20px rgba(28,45,79,.09);
+      border-color: var(--pink-m);
+    }
+
+    .service-card-icon {
+      width: 44px; height: 44px;
+      background: var(--pink-l);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-size: 1rem; font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .service-card p {
+      font-size: .875rem; color: var(--muted); line-height: 1.85;
+    }
+
+    /* ── LEARNING ─────────────────────────────── */
+    #learning { background: var(--gray); }
+
+    .learning-domains {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .domain-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 24px;
+      border-top: 3px solid var(--navy);
+    }
+
+    .domain-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .domain-emoji { font-size: 1.3rem; }
+
+    .domain-title {
+      font-size: .97rem; font-weight: 700;
+      color: var(--navy);
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .domain-items {
+      list-style: none;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+
+    .domain-items li {
+      background: var(--gray);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: .78rem; font-weight: 500;
+      padding: 4px 12px; border-radius: 2px;
+    }
+
+    /* ── SESSION FORMAT ───────────────────────── */
+    #format { background: var(--white); }
+
+    .format-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) { .format-row { grid-template-columns: 1fr; } }
+
+    .session-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .session-box-header {
+      background: var(--navy);
+      padding: 16px 24px;
+      font-size: .75rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--pink-m);
+      letter-spacing: .14em;
+    }
+
+    .session-item {
+      display: flex; gap: 16px;
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .session-item:last-child { border-bottom: none; }
+
+    .session-tag {
+      background: var(--navy);
+      color: var(--white);
+      font-size: .72rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 4px 10px; border-radius: 2px;
+      white-space: nowrap; height: fit-content;
+      margin-top: 2px;
+    }
+
+    .session-content h4 {
+      font-size: .95rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 6px;
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .session-content p {
+      font-size: .85rem; color: var(--muted); line-height: 1.8;
+    }
+
+    .format-details { }
+
+    .detail-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-item:first-child { padding-top: 0; }
+    .detail-item:last-child { border-bottom: none; }
+
+    .detail-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--pink-l);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    .detail-label {
+      font-size: .75rem; color: var(--muted); font-weight: 600;
+      font-family: 'Noto Sans JP', sans-serif;
+      letter-spacing: .06em; margin-bottom: 2px;
+    }
+
+    .detail-value {
+      font-size: .97rem; font-weight: 700; color: var(--navy);
+    }
+
+    /* ── CURRICULUM ───────────────────────────── */
+    #curriculum { background: var(--gray); }
+
+    .curriculum-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .curriculum-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 24px;
+    }
+
+    .curr-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: .78rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      border-radius: 2px;
+      margin-bottom: 14px;
+    }
+
+    .curr-title {
+      font-size: .98rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 12px;
+      font-family: 'Noto Serif JP', serif;
+      line-height: 1.45;
+    }
+
+    .curr-parts { list-style: none; }
+    .curr-parts li {
+      font-size: .85rem; color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--gray);
+      display: flex; gap: 8px;
+    }
+    .curr-parts li:last-child { border-bottom: none; }
+    .curr-parts li::before { content: '—'; color: var(--pink); flex-shrink: 0; }
+
+    /* ── AFFORDABILITY ────────────────────────── */
+    #affordability { background: var(--white); }
+
+    .afford-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) { .afford-wrap { grid-template-columns: 1fr; } }
+
+    .afford-copy h3 {
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--navy);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .afford-copy p {
+      font-size: .93rem; color: var(--muted); line-height: 1.95;
+    }
+
+    .comparison-table {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .comp-row {
+      display: flex; align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+    }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-row.highlight { background: var(--pink-l); }
+
+    .comp-name {
+      flex: 1;
+      font-size: .92rem; font-weight: 600; color: var(--text);
+    }
+    .comp-row.highlight .comp-name { color: var(--navy); font-weight: 700; }
+
+    .comp-badge {
+      font-size: .75rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 3px 10px; border-radius: 2px;
+    }
+
+    .comp-badge.affordable {
+      background: var(--pink);
+      color: var(--white);
+    }
+
+    .comp-badge.expensive {
+      background: var(--gray-m);
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ──────────────────────────────── */
+    #contact { background: var(--gray); }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 48px 40px;
+    }
+
+    @media (max-width: 600px) { .contact-form { padding: 32px 24px; } }
+
+    .form-group { margin-bottom: 22px; }
+
+    label {
+      display: block;
+      font-size: .83rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: var(--navy);
+      margin-bottom: 8px;
+      letter-spacing: .03em;
+    }
+
+    label .required {
+      color: var(--pink);
+      margin-left: 6px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: var(--gray);
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      padding: 13px 16px;
+      font-size: .95rem;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      transition: border-color .2s, background .2s;
+      outline: none;
+    }
+
+    input::placeholder, textarea::placeholder { color: #aab2bf; }
+
+    input:focus, textarea:focus {
+      border-color: var(--navy);
+      background: var(--white);
+    }
+
+    textarea { resize: vertical; min-height: 130px; }
+
+    .form-submit-wrap {
+      margin-top: 32px;
+    }
+
+    .form-submit {
+      display: block; width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      font-size: .97rem; font-weight: 700;
+      font-family: 'Noto Sans JP', sans-serif;
+      border: none; border-radius: 4px;
+      padding: 17px 32px;
+      cursor: pointer;
+      letter-spacing: .06em;
+      transition: opacity .2s, transform .2s;
+    }
+    .form-submit:hover { opacity: .85; transform: translateY(-1px); }
+
+    .form-note {
+      font-size: .78rem; color: var(--muted);
+      text-align: center; margin-top: 14px;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      background: var(--navy);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+
+    .footer-logo-text {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white);
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    footer p { font-size: .8rem; color: rgba(255,255,255,.4); }
+
+    /* ── FADE IN ──────────────────────────────── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 768px) {
+      header { padding: 0 20px; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#hero" class="logo-wrap">
+    <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 10C5 10 11 8 18 11V30C11 27 5 29 5 29V10Z" fill="#1c2d4f"/>
+      <path d="M31 10C31 10 25 8 18 11V30C25 27 31 29 31 29V10Z" fill="#d4617a" opacity=".75"/>
+      <rect x="17" y="11" width="2" height="19" fill="#ffffff" rx="1"/>
+    </svg>
+    <span class="logo-text">Plato Note</span>
+  </a>
+  <nav>
+    <a href="#mvv">私たちについて</a>
+    <a href="#service">サービス</a>
+    <a href="#learning">学習領域</a>
+    <a href="#affordability">料金の考え方</a>
+    <a href="#contact" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">FUTURE LIBERAL ARTS PROGRAM</span>
+    <h1 class="hero-title">
+      未来を生き抜く力を、<br /><em>今日から</em>育てる。
+    </h1>
+    <p class="hero-sub">
+      グローバル教育・STEAM・金融・AIを融合させた<br />
+      次世代のリベラルアーツプログラム。<br />
+      オンラインで、世界で活躍する力を培います。
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">無料で相談する</a>
+      <a href="#service" class="btn-secondary">サービスを見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- MVV -->
+<section id="mvv">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">OUR MISSION & VISION</span>
+      <h2 class="section-title">私たちが目指す未来</h2>
+      <p class="section-lead">
+        日本の次世代が世界の舞台で輝けるよう、真の教育を届けます。
+      </p>
+    </div>
+    <div class="mvv-grid fade-in">
+      <div class="mvv-card">
+        <div class="mvv-label">MISSION</div>
+        <div class="mvv-heading">日本人が世界で活躍する時代の創造</div>
+        <p class="mvv-text">
+          グローバルな舞台で自信を持って活躍できる日本人を育てるため、真に役立つ教育機会を提供し続けます。
+        </p>
+      </div>
+      <div class="mvv-card">
+        <div class="mvv-label">VISION</div>
+        <div class="mvv-heading">次世代のグローバルリーダーを支える教育の確立と提供</div>
+        <p class="mvv-text">
+          変化の激しい時代を生き抜くために必要な思考力・対話力・実践力を、体系的に育む教育プログラムを確立します。
+        </p>
+      </div>
+      <div class="mvv-card">
+        <div class="mvv-label">APPROACH</div>
+        <div class="mvv-heading">未来型リベラルアーツで3つの資本を育む</div>
+        <p class="mvv-text">
+          人的資本・社会関係資本・金融資本を中高生の段階から育成する、AI活用型の横断学習プログラムです。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">WHY PLATO NOTE?</span>
+      <h2 class="section-title">こんな悩みはありませんか？</h2>
+      <p class="section-lead">
+        多くの保護者が、お子さまの将来に不安を感じています。
+      </p>
+    </div>
+    <div class="problem-grid fade-in">
+      <div class="problem-card">
+        <div class="problem-icon">🌍</div>
+        <p><strong>グローバルな環境</strong>で自分の意見を発信できる力を身につけてほしい。でも、どこから始めればよいかわからない。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🤖</div>
+        <p>AIが当たり前の時代に、<strong>AIを使いこなせる人材</strong>になってほしい。60%の親が経済格差を懸念している。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">💰</div>
+        <p>国際校や留学は費用が高すぎる。質の高い教育を、<strong>手頃な価格</strong>で受けさせたい。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📊</div>
+        <p><strong>お金や投資</strong>の知識を早いうちに身につけてほしい。50%以上の家庭が金融教育の必要性を実感している。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🧠</div>
+        <p>テストの点数だけでなく、<strong>論理的思考・批判的思考</strong>など非認知能力を育てたい。70%の親が多様な評価を求めている。</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🔬</div>
+        <p><strong>STEAM教育</strong>を受けさせたい。90%の保護者がSTEAMはお子さまの未来に重要だと考えている。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="service">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">SERVICE</span>
+      <h2 class="section-title">Plato Noteとは</h2>
+      <p class="section-lead">
+        グローバル教育・STEAM・金融・AI教育を組み合わせた未来型リベラルアーツプログラム。
+        オンラインで、世界を舞台に活躍するための力を育みます。
+      </p>
+    </div>
+    <div class="service-grid fade-in">
+      <div class="service-card">
+        <div class="service-card-icon">🎓</div>
+        <h3>専門家による質の高い講義</h3>
+        <p>外国人講師・エンジニア・金融のスペシャリストによる実践的な講義。最前線の知識を直接学べます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">💬</div>
+        <h3>少人数グループでの実践学習</h3>
+        <p>少人数のグループで事前に設定されたテーマについて議論し、協働して意思決定する実践型の学習です。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">💻</div>
+        <h3>完全オンライン・場所を選ばない</h3>
+        <p>Google Meetを利用したオンライン開催。全国どこからでも受講可能で、海外在住の方も参加できます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">🌐</div>
+        <h3>異文化・多様な価値観に触れる</h3>
+        <p>外国人講師や他の生徒との対話を通じて、多様な視点・文化的背景を自然に身につけます。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">⚡</div>
+        <h3>AIを活用した実践的スキル</h3>
+        <p>AIツールの知識と実際の活用まで、現代に必須のデジタルリテラシーを体系的に学習します。</p>
+      </div>
+      <div class="service-card">
+        <div class="service-card-icon">👨‍👩‍👧</div>
+        <h3>保護者の方も参加可能</h3>
+        <p>ご興味のある保護者の方はセッションへの参加も歓迎。お子さまの学びをともに見守れます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING DOMAINS -->
+<section id="learning">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">LEARNING AREAS</span>
+      <h2 class="section-title">5つの学習領域</h2>
+      <p class="section-lead">
+        35以上の実践的な学習項目を、5つの領域にわたって体系的に学びます。
+      </p>
+    </div>
+    <div class="learning-domains fade-in">
+      <div class="domain-card">
+        <div class="domain-header">
+          <span class="domain-emoji">🧩</span>
+          <span class="domain-title">非認知能力</span>
+        </div>
+        <ul class="domain-items">
+          <li>創造的思考</li>
+          <li>論理的思考</li>
+          <li>批判的思考</li>
+          <li>タイムマネジメント</li>
+          <li>関係構築スキル</li>
+          <li>倫理観</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header">
+          <span class="domain-emoji">🌍</span>
+          <span class="domain-title">グローバル教育</span>
+        </div>
+        <ul class="domain-items">
+          <li>コミュニケーション</li>
+          <li>文化的理解</li>
+          <li>国際問題リテラシー</li>
+          <li>英語での発信力</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header">
+          <span class="domain-emoji">🔭</span>
+          <span class="domain-title">STEAM教育</span>
+        </div>
+        <ul class="domain-items">
+          <li>ビジネス思考</li>
+          <li>イノベーション</li>
+          <li>ビジネスモデル設計</li>
+          <li>プロトタイピング</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header">
+          <span class="domain-emoji">💰</span>
+          <span class="domain-title">金融教育</span>
+        </div>
+        <ul class="domain-items">
+          <li>個人キャッシュフロー</li>
+          <li>投資の基礎</li>
+          <li>ビジネスファイナンス</li>
+          <li>FinTech</li>
+        </ul>
+      </div>
+      <div class="domain-card">
+        <div class="domain-header">
+          <span class="domain-emoji">🤖</span>
+          <span class="domain-title">AI教育</span>
+        </div>
+        <ul class="domain-items">
+          <li>AIツール活用</li>
+          <li>AIリテラシー</li>
+          <li>実践的AI応用</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SESSION FORMAT -->
+<section id="format">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">SESSION FORMAT</span>
+      <h2 class="section-title">セッションの構成</h2>
+      <p class="section-lead">
+        インプットとアウトプットをバランスよく組み合わせた実践型プログラムです。
+      </p>
+    </div>
+    <div class="format-row fade-in">
+      <div class="session-box">
+        <div class="session-box-header">SESSION STRUCTURE</div>
+        <div class="session-item">
+          <span class="session-tag">PART 1</span>
+          <div class="session-content">
+            <h4>Logic Learning (ロジック学習)</h4>
+            <p>外国人講師・エンジニア・金融スペシャリストによる専門家の講義。最前線の知識を体系的にインプットします。</p>
+          </div>
+        </div>
+        <div class="session-item">
+          <span class="session-tag">PART 2</span>
+          <div class="session-content">
+            <h4>Practice Learning (実践学習)</h4>
+            <p>少人数グループで設定テーマについて議論・協働。多様な価値観に触れながら実践力を養います。</p>
+          </div>
+        </div>
+      </div>
+      <div class="format-details">
+        <div class="detail-item">
+          <div class="detail-icon">💻</div>
+          <div>
+            <div class="detail-label">受講形式</div>
+            <div class="detail-value">完全オンライン (Google Meet)</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">🎯</div>
+          <div>
+            <div class="detail-label">対象</div>
+            <div class="detail-value">中学生・高校生</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">👥</div>
+          <div>
+            <div class="detail-label">クラス形式</div>
+            <div class="detail-value">少人数制グループ</div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon">🌐</div>
+          <div>
+            <div class="detail-label">講師</div>
+            <div class="detail-value">外国人講師・エンジニア・金融専門家</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="curriculum">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">CURRICULUM SAMPLE</span>
+      <h2 class="section-title">カリキュラムサンプル</h2>
+      <p class="section-lead">
+        実際のセッションの内容をご紹介します。
+      </p>
+    </div>
+    <div class="curriculum-list fade-in">
+      <div class="curriculum-card">
+        <div class="curr-number">01</div>
+        <div class="curr-title">世界と日本の文化の違いを理解する</div>
+        <ul class="curr-parts">
+          <li>Logic: グローバル教育とコミュニケーション (外国人講師)</li>
+          <li>Practice: 日本人 vs マレーシア人の文化シナリオのロールプレイ</li>
+        </ul>
+      </div>
+      <div class="curriculum-card">
+        <div class="curr-number">02</div>
+        <div class="curr-title">AIツールを使ってウェブサイトを作成する</div>
+        <ul class="curr-parts">
+          <li>Logic: AIツールの知識と活用方法 (エンジニア講師)</li>
+          <li>Practice: AIツールを使って簡単なWebページを実際に作成</li>
+        </ul>
+      </div>
+      <div class="curriculum-card">
+        <div class="curr-number">03</div>
+        <div class="curr-title">自分のキャッシュフローを設計する</div>
+        <ul class="curr-parts">
+          <li>Logic: 個人の家計とキャッシュフローの基礎 (金融スペシャリスト)</li>
+          <li>Practice: 将来の収支シミュレーションと議論</li>
+        </ul>
+      </div>
+      <div class="curriculum-card">
+        <div class="curr-number">04</div>
+        <div class="curr-title">ビジネスモデルを設計する</div>
+        <ul class="curr-parts">
+          <li>Logic: ビジネスモデルキャンバスと事業構築の考え方</li>
+          <li>Practice: グループで新規事業プランをプロトタイピング</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFFORDABILITY -->
+<section id="affordability">
+  <div class="container">
+    <div class="fade-in">
+      <span class="section-eyebrow">AFFORDABILITY</span>
+      <h2 class="section-title">料金の考え方</h2>
+    </div>
+    <div class="afford-wrap fade-in">
+      <div class="afford-copy">
+        <h3>インターナショナルスクールや留学よりも、大幅にリーズナブル。</h3>
+        <p>
+          高品質なグローバル教育は、これまで多額の費用がかかるものでした。
+          Plato Noteは、オンラインというかたちを活用することで、インターナショナルスクールや留学と比べ大幅にリーズナブルな費用で、同等以上の学習体験をお届けします。
+        </p>
+        <br />
+        <p>
+          詳しい料金はお問い合わせの際にご案内しております。まずはお気軽にご連絡ください。
+        </p>
+        <br />
+        <a href="#contact" class="btn-primary">料金について問い合わせる</a>
+      </div>
+      <div>
+        <div class="comparison-table">
+          <div class="comp-row highlight">
+            <span class="comp-name">Plato Note</span>
+            <span class="comp-badge affordable">リーズナブル</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-name">インターナショナルスクール</span>
+            <span class="comp-badge expensive">年間 250万円〜</span>
+          </div>
+          <div class="comp-row">
+            <span class="comp-name">海外留学</span>
+            <span class="comp-badge expensive">年間 400万円〜</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
+      <span class="section-eyebrow">CONTACT</span>
+      <h2 class="section-title">お問い合わせ</h2>
+      <p class="section-lead" style="margin: 0 auto;">
+        サービスに関するご質問・体験希望など、お気軽にご連絡ください。
+      </p>
+    </div>
+    <div class="contact-inner fade-in">
+      <div class="contact-form">
+        <div class="form-group">
+          <label>氏名 <span class="required">必須</span></label>
+          <input type="text" placeholder="例: 山田 太郎" readonly onfocus="goToForm()" />
+        </div>
+        <div class="form-group">
+          <label>メールアドレス <span class="required">必須</span></label>
+          <input type="email" placeholder="例: example@email.com" readonly onfocus="goToForm()" />
+        </div>
+        <div class="form-group">
+          <label>電話番号</label>
+          <input type="tel" placeholder="例: 090-1234-5678" readonly onfocus="goToForm()" />
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ内容 <span class="required">必須</span></label>
+          <textarea placeholder="サービスへのご質問、体験希望など、お気軽にご記入ください。" readonly onfocus="goToForm()"></textarea>
+        </div>
+        <div class="form-submit-wrap">
+          <a
+            href="https://forms.gle/7veEXHkgade9PR1M6"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="form-submit"
+            style="display:block; text-align:center; text-decoration:none;"
+          >
+            Googleフォームで送信する →
+          </a>
+          <p class="form-note">
+            上のボタンからGoogleフォームにアクセスしてお送りください。<br />
+            通常2〜3営業日以内にご返信いたします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 10C5 10 11 8 18 11V30C11 27 5 29 5 29V10Z" fill="#ffffff"/>
+      <path d="M31 10C31 10 25 8 18 11V30C25 27 31 29 31 29V10Z" fill="#d4617a" opacity=".8"/>
+      <rect x="17" y="11" width="2" height="19" fill="#1c2d4f" rx="1"/>
+    </svg>
+    <span class="footer-logo-text">Plato Note</span>
+  </div>
+  <p>© 2026 Plato Note. All rights reserved.</p>
+</footer>
+
+<script>
+  // フォームフィールドをクリック/フォーカスしたらGoogleフォームへ
+  function goToForm() {
+    window.open('https://forms.gle/7veEXHkgade9PR1M6', '_blank');
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
