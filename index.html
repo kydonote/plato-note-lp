@@ -491,16 +491,17 @@
     .comp-badge.affordable { background: var(--pink); color: var(--white); }
     .comp-badge.expensive { background: var(--gray-m); color: var(--muted); }
 
-    /* ── CONTACT (Custom Form) ────────────────── */
+    /* ── CONTACT ─────────────────────────────── */
     #contact { background: var(--gray); }
 
-    .contact-inner { max-width: 680px; margin: 0 auto; }
+    .contact-inner { max-width: 700px; margin: 0 auto; }
 
     .contact-card {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 4px 24px rgba(28,45,79,.07);
     }
 
     .contact-card-head {
@@ -517,78 +518,16 @@
       line-height: 1.7;
     }
 
-    .contact-card-body { padding: 36px 36px 40px; }
-
-    .form-group { margin-bottom: 20px; }
-    .form-label {
-      display: block;
-      font-size: .8rem; font-weight: 700;
-      font-family: 'Noto Sans JP', sans-serif;
-      color: var(--navy);
-      margin-bottom: 8px;
-      letter-spacing: .03em;
-    }
-    .form-label .req {
-      color: var(--pink); font-size: .68rem; font-weight: 700;
-      margin-left: 6px; letter-spacing: .06em;
-    }
-    .form-input {
-      display: block; width: 100%;
-      background: var(--gray);
-      border: 1.5px solid var(--border); border-radius: 5px;
-      padding: 13px 16px;
-      font-size: .95rem; color: var(--text);
-      font-family: 'Noto Sans JP', sans-serif;
-      transition: border-color .2s, background .2s;
-      outline: none;
-      -webkit-appearance: none; appearance: none;
-    }
-    .form-input::placeholder { color: #b0bac8; }
-    .form-input:focus {
-      border-color: var(--navy);
+    /* Google Form iframe wrapper */
+    .form-iframe-wrap {
       background: var(--white);
-      box-shadow: 0 0 0 3px rgba(28,45,79,.07);
+      overflow: hidden;
     }
-    textarea.form-input { resize: vertical; min-height: 120px; }
-
-    .form-btn {
-      display: block; width: 100%;
-      background: var(--navy); color: var(--white);
-      font-size: .97rem; font-weight: 700;
-      font-family: 'Noto Sans JP', sans-serif;
-      border: none; border-radius: 5px;
-      padding: 16px 32px;
-      cursor: pointer;
-      letter-spacing: .06em;
-      margin-top: 28px;
-      transition: opacity .2s, transform .2s;
-    }
-    .form-btn:hover { opacity: .85; transform: translateY(-1px); }
-    .form-btn:active { transform: translateY(0); }
-
-    .form-note-text {
-      font-size: .75rem; color: var(--muted);
-      text-align: center; margin-top: 14px; line-height: 1.7;
-    }
-
-    /* Success state */
-    .contact-success {
-      display: none;
-      text-align: center;
-      padding: 60px 36px;
-    }
-    .success-icon {
-      width: 60px; height: 60px;
-      background: var(--pink-l); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; margin: 0 auto 20px;
-    }
-    .contact-success h3 {
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 12px;
-    }
-    .contact-success p {
-      font-size: .9rem; color: var(--muted); line-height: 1.95;
+    .form-iframe-wrap iframe {
+      display: block;
+      width: 100%;
+      border: none;
+      min-height: 860px;
     }
 
     /* ── FOOTER ───────────────────────────────── */
@@ -616,17 +555,22 @@
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ───────────────────────────── */
-    @media (max-width: 960px) {
+
+    /* タブレット: 2カラム、5枚目は中央寄せ */
+    @media (min-width: 641px) and (max-width: 960px) {
       .learning-domains {
         grid-template-columns: repeat(2, 1fr);
       }
-      .domain-card { grid-column: span 1 !important; }
-      /* Center the 5th item when 2 columns */
+      .domain-card {
+        grid-column: span 1 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        width: auto !important;
+      }
       .domain-card:nth-child(5) {
         grid-column: 1 / -1 !important;
-        max-width: calc(50% - 7px);
-        margin: 0 auto;
-        width: 100%;
+        justify-self: center;
+        width: calc(50% - 7px) !important;
       }
     }
 
@@ -635,25 +579,40 @@
       .afford-wrap { grid-template-columns: 1fr; gap: 32px; }
     }
 
+    /* スマホ: 全て1カラム */
     @media (max-width: 640px) {
       header { padding: 0 20px; }
       nav { display: none; }
       .hamburger { display: flex; }
       section { padding: 64px 20px; }
 
-      .learning-domains { grid-template-columns: 1fr; }
-      .domain-card { grid-column: span 1 !important; max-width: 100% !important; margin: 0 !important; }
+      /* 全グリッドを1カラムに統一 */
+      .learning-domains {
+        grid-template-columns: 1fr !important;
+      }
+      .domain-card {
+        grid-column: 1 / -1 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        width: 100% !important;
+        justify-self: stretch !important;
+      }
+      .problem-grid,
+      .service-grid,
+      .curriculum-list {
+        grid-template-columns: 1fr;
+      }
 
-      .contact-card-head { padding: 24px 24px; }
-      .contact-card-body { padding: 28px 24px 32px; }
-      .contact-success { padding: 40px 24px; }
+      .contact-card-head { padding: 22px 20px; }
+      .form-iframe-wrap iframe { min-height: 920px; }
 
-      .fab { bottom: 20px; right: 16px; font-size: .8rem; padding: 12px 18px; }
+      .fab { bottom: 20px; right: 14px; font-size: .8rem; padding: 11px 16px; }
     }
 
     @media (max-width: 480px) {
       .hero-btns { flex-direction: column; align-items: center; }
       .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+      .afford-wrap .comparison-table { font-size: .85rem; }
     }
   </style>
 </head>
@@ -668,12 +627,12 @@
 <!-- HEADER -->
 <header id="header">
   <a href="#hero" class="logo-wrap">
-    <!-- Book icon SVG -->
-    <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 9C16.5 7.5 10 7 5 9V33C10 31 16.5 31.5 20 33V9Z" fill="#d4617a"/>
-      <path d="M20 9C23.5 7.5 30 7 35 9V33C30 31 23.5 31.5 20 33V9Z" fill="#d4617a" opacity=".75"/>
-      <path d="M19.5 9.5V33" stroke="white" stroke-width="1" stroke-opacity="0.4"/>
-      <path d="M20.5 9.5V33" stroke="white" stroke-width="1" stroke-opacity="0.4"/>
+    <!-- Book icon SVG (Kydo Note logo reproduction) -->
+    <svg class="logo-icon" viewBox="0 0 52 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Left page -->
+      <path d="M25 6 C20 4.5 12 4 5 6.5 C4 7 3.5 7.8 3.5 8.5 L3.5 33.5 C3.5 34.5 4.5 35 5.5 34.5 C12 32 20 31.5 25 33.5 Z" fill="#d4617a"/>
+      <!-- Right page -->
+      <path d="M27 6 C32 4.5 40 4 47 6.5 C48 7 48.5 7.8 48.5 8.5 L48.5 33.5 C48.5 34.5 47.5 35 46.5 34.5 C40 32 32 31.5 27 33.5 Z" fill="#d4617a"/>
     </svg>
     <span class="logo-text">Plato Note</span>
   </a>
@@ -1078,92 +1037,28 @@
       <div class="contact-card">
         <div class="contact-card-head">
           <h3>お問い合わせフォーム</h3>
-          <p>通常2〜3営業日以内にご返信いたします。</p>
+          <p>サービスへのご質問・体験希望など、お気軽にご連絡ください。<br>通常2〜3営業日以内にご返信いたします。</p>
         </div>
-        <div id="contactFormWrap">
-          <div class="contact-card-body">
-            <form
-              id="contactForm"
-              action="https://docs.google.com/forms/d/e/1FAIpQLScH49speaDJzCuikQM2fP5WRQz-nHFrBsjrzBmRJdk5ORl2xQ/formResponse"
-              method="POST"
-              target="hidden_iframe"
-              onsubmit="handleSubmit()"
-            >
-              <div class="form-group">
-                <label class="form-label" for="fname">
-                  氏名 <span class="req">必須</span>
-                </label>
-                <input
-                  id="fname" type="text"
-                  name="entry.1647538514"
-                  class="form-input"
-                  placeholder="例：山田 太郎"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="femail">
-                  メールアドレス <span class="req">必須</span>
-                </label>
-                <input
-                  id="femail" type="email"
-                  name="entry.762772864"
-                  class="form-input"
-                  placeholder="例：example@email.com"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="ftel">電話番号</label>
-                <input
-                  id="ftel" type="tel"
-                  name="entry.1689301719"
-                  class="form-input"
-                  placeholder="例：090-1234-5678"
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="fmsg">
-                  お問い合わせ内容 <span class="req">必須</span>
-                </label>
-                <textarea
-                  id="fmsg"
-                  name="entry.1037903891"
-                  class="form-input"
-                  placeholder="サービスへのご質問、体験希望など、お気軽にご記入ください。"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="form-btn">送信する</button>
-              <p class="form-note-text">
-                送信いただいた情報は、お問い合わせ対応のみに使用します。
-              </p>
-            </form>
-          </div>
-        </div>
-        <div class="contact-success" id="contactSuccess">
-          <div class="success-icon">✓</div>
-          <h3>送信が完了しました</h3>
-          <p>
-            お問い合わせいただき、誠にありがとうございます。<br />
-            内容を確認の上、2〜3営業日以内にご連絡いたします。
-          </p>
+        <div class="form-iframe-wrap">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLScH49speaDJzCuikQM2fP5WRQz-nHFrBsjrzBmRJdk5ORl2xQ/viewform?embedded=true"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="お問い合わせフォーム"
+          >読み込んでいます…</iframe>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Hidden iframe for form submission -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none" onload="onIframeLoad()"></iframe>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 9C16.5 7.5 10 7 5 9V33C10 31 16.5 31.5 20 33V9Z" fill="white"/>
-      <path d="M20 9C23.5 7.5 30 7 35 9V33C30 31 23.5 31.5 20 33V9Z" fill="#d4617a" opacity=".85"/>
-      <path d="M19.5 9.5V33" stroke="rgba(28,45,79,0.3)" stroke-width="1"/>
+    <svg width="28" height="22" viewBox="0 0 52 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M25 6 C20 4.5 12 4 5 6.5 C4 7 3.5 7.8 3.5 8.5 L3.5 33.5 C3.5 34.5 4.5 35 5.5 34.5 C12 32 20 31.5 25 33.5 Z" fill="white"/>
+      <path d="M27 6 C32 4.5 40 4 47 6.5 C48 7 48.5 7.8 48.5 8.5 L48.5 33.5 C48.5 34.5 47.5 35 46.5 34.5 C40 32 32 31.5 27 33.5 Z" fill="#d4617a"/>
     </svg>
     <span class="footer-logo-text">Plato Note</span>
   </div>
@@ -1171,23 +1066,6 @@
 </footer>
 
 <script>
-  /* ── Form submission ── */
-  let submitted = false;
-
-  function handleSubmit() {
-    submitted = true;
-  }
-
-  function onIframeLoad() {
-    if (!submitted) return;
-    // Hide form, show success
-    document.getElementById('contactFormWrap').style.display = 'none';
-    document.getElementById('contactSuccess').style.display = 'block';
-    submitted = false;
-    // Scroll to success message
-    document.getElementById('contactSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-
   /* ── Hamburger menu ── */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileNav    = document.getElementById('mobileNav');
