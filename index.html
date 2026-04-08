@@ -1150,8 +1150,8 @@
 </footer>
 
 <script>
-  /* ── Google Forms no-cors submission ── */
-  async function handleFormSubmit(e) {
+  /* ── Google Forms iframe submission (CORS回避) ── */
+  function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const btn = document.getElementById('submitBtn');
@@ -1163,16 +1163,27 @@
     if (!isValid) return;
     btn.disabled = true;
     btn.textContent = '送信中…';
-    try {
-      await fetch(
-        'https://docs.google.com/forms/d/e/1FAIpQLScH49speaDJzCuikQM2fP5WRQz-nHFrBsjrzBmRJdk5ORl2xQ/formResponse',
-        { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(form)) }
-      );
-    } catch (_) {}
-    document.getElementById('contactFormWrap').style.display = 'none';
-    const s = document.getElementById('contactSuccess');
-    s.style.display = 'flex';
-    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // hidden iframeにフォームをネイティブ送信（レスポンスはiframeが吸収）
+    let iframe = document.getElementById('_gf_iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = '_gf_iframe';
+      iframe.name = '_gf_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLScH49speaDJzCuikQM2fP5WRQz-nHFrBsjrzBmRJdk5ORl2xQ/formResponse';
+    form.method = 'POST';
+    form.target = '_gf_iframe';
+    form.submit();
+
+    setTimeout(() => {
+      document.getElementById('contactFormWrap').style.display = 'none';
+      const s = document.getElementById('contactSuccess');
+      s.style.display = 'flex';
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 1000);
   }
 
   /* ── Hamburger menu ── */
