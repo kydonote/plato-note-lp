@@ -1150,8 +1150,10 @@
 </footer>
 
 <script>
-  /* ── Google Forms iframe submission (CORS回避) ── */
-  function handleFormSubmit(e) {
+  /* ── Apps Script 経由送信 ── */
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrWYypkl-18AFf6TI4yUcXlkVgapbzKT22Q2QrACNHnBtVI9ErFuxgvQ9X105v2V_s/exec';
+
+  async function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const btn = document.getElementById('submitBtn');
@@ -1164,26 +1166,23 @@
     btn.disabled = true;
     btn.textContent = '送信中…';
 
-    // hidden iframeにフォームをネイティブ送信（レスポンスはiframeが吸収）
-    let iframe = document.getElementById('_gf_iframe');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.id = '_gf_iframe';
-      iframe.name = '_gf_iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
-    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLScH49speaDJzCuikQM2fP5WRQz-nHFrBsjrzBmRJdk5ORl2xQ/formResponse';
-    form.method = 'POST';
-    form.target = '_gf_iframe';
-    form.submit();
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams({
+          name:    document.getElementById('fname').value,
+          email:   document.getElementById('femail').value,
+          tel:     document.getElementById('ftel').value,
+          message: document.getElementById('fmsg').value
+        })
+      });
+    } catch (_) {}
 
-    setTimeout(() => {
-      document.getElementById('contactFormWrap').style.display = 'none';
-      const s = document.getElementById('contactSuccess');
-      s.style.display = 'flex';
-      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 1000);
+    document.getElementById('contactFormWrap').style.display = 'none';
+    const s = document.getElementById('contactSuccess');
+    s.style.display = 'flex';
+    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   /* ── Hamburger menu ── */
