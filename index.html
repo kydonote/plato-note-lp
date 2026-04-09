@@ -1150,39 +1150,73 @@
 </footer>
 
 <script>
-  /* ── Apps Script 経由送信 ── */
+  /* ── Apps Script 経由送信（hidden iframe ネイティブ送信） ── */
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrWYypkl-18AFf6TI4yUcXlkVgapbzKT22Q2QrACNHnBtVI9ErFuxgvQ9X105v2V_s/exec';
 
-  async function handleFormSubmit(e) {
+  function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const btn = document.getElementById('submitBtn');
+
+    // バリデーション
     let isValid = true;
     form.querySelectorAll('[required]').forEach(el => {
       if (!el.value.trim()) { el.classList.add('input-error'); isValid = false; }
       else el.classList.remove('input-error');
     });
     if (!isValid) return;
+
     btn.disabled = true;
     btn.textContent = '送信中…';
 
-    try {
-      await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: new URLSearchParams({
-          name:    document.getElementById('fname').value,
-          email:   document.getElementById('femail').value,
-          tel:     document.getElementById('ftel').value,
-          message: document.getElementById('fmsg').value
-        })
-      });
-    } catch (_) {}
+    // hidden iframe を作成してネイティブ送信（CORSリダイレクトを回避）
+    let iframe = document.getElementById('_as_iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id   = '_as_iframe';
+      iframe.name = '_as_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
 
-    document.getElementById('contactFormWrap').style.display = 'none';
-    const s = document.getElementById('contactSuccess');
-    s.style.display = 'flex';
-    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // entry.* を Apps Script のパラメータ名にマッピングした hidden input を追加
+    const map = { name: 'fname', email: 'femail', tel: 'ftel', message: 'fmsg' };
+    Object.entries(map).forEach(([asKey, inputId]) => {
+      let hidden = form.querySelector('input[data-as="' + asKey + '"]');
+      if (!hidden) {
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.dataset.as = asKey;
+        hidden.name = asKey;
+        form.appendChild(hidden);
+      }
+      hidden.value = document.getElementById(inputId).value;
+    });
+
+    // entry.* の name 属性を一時的に無効化して Apps Script 用の name だけ送信
+    form.querySelectorAll('[name^="entry."]').forEach(el => {
+      el.dataset.origName = el.name;
+      el.removeAttribute('name');
+    });
+
+    form.action  = APPS_SCRIPT_URL;
+    form.method  = 'POST';
+    form.target  = '_as_iframe';
+    form.submit();
+
+    // entry.* の name を元に戻す
+    form.querySelectorAll('[data-orig-name]').forEach(el => {
+      el.name = el.dataset.origName;
+      delete el.dataset.origName;
+    });
+
+    // 1秒後に成功画面を表示
+    setTimeout(() => {
+      document.getElementById('contactFormWrap').style.display = 'none';
+      const s = document.getElementById('contactSuccess');
+      s.style.display = 'flex';
+      s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 1000);
   }
 
   /* ── Hamburger menu ── */
